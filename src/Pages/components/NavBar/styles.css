@@ -1,0 +1,27 @@
+.barra-superior-govco {
+	width: 100%;
+
+	background-color: var(--black);
+	height: 48px;
+	padding: 0 86px;
+
+	display: flex;
+	align-items: center;
+	justify-content: start;
+}
+
+.barra-superior-govco > a {
+	padding: 0;
+	margin: 0;
+	color: var(--white) !important;
+}
+
+
+  
+@media (max-width: 991px) {
+	.barra-superior-govco {
+		padding: 0 20px;
+
+		justify-content: center;
+	}
+}

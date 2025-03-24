@@ -1,0 +1,15 @@
+.main-form-container {
+    border-top-left-radius: 100px;
+    border-bottom-right-radius: 100px;
+    overflow: hidden;
+
+    border: 1px solid var(--lines-color);
+}
+.main-form-container img {
+    width: 100%;
+    object-fit: contain;
+    transition: all 0.4s ease;
+}
+.main-form-container img:hover {
+    transform: scale(1.05);
+}

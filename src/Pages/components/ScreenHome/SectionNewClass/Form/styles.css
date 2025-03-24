@@ -1,0 +1,10 @@
+.form-container {
+    height: 100%;
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .form-inputs-container {
+        padding: 20px !important;
+    }
+}

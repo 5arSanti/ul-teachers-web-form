@@ -1,0 +1,12 @@
+.main-logo-container img {
+    transition: all 0.4s ease;
+}
+.main-logo-container img:hover {
+    transform: scale(1.05);
+}
+
+@media (max-width: 900px) {
+    .main-logo-container {
+        justify-content: center !important;
+    }
+}

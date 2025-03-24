@@ -1,0 +1,145 @@
+textarea {
+    resize: vertical;
+}
+
+.input-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+
+	transition: all 0.4s ease;
+}
+
+.input-container label{
+    font-size: 12px;
+    font-weight: bold;
+	font-style: italic;
+    color: var(--text-color);
+    padding-left: 5px;
+
+	transition: all 0.4s ease;
+
+}
+
+
+
+
+
+/* Inputs de Texto */
+.input-container textarea {
+    min-height: 75px;
+}
+.input-container input, .input-container textarea {
+	transition: all 0.4s ease;
+
+    background-color: transparent;
+    color: var(--text-color);
+    padding: 10px;
+
+	border: none;
+	border-bottom: 3px solid;
+    border-image: linear-gradient(90deg, var(--pallete-1) 0%, rgba(0,212,255,0) 100%);
+    border-image-slice: 1;
+
+    outline: var(--pallete-1);
+
+}
+.input-container input::placeholder, .input-container textarea::placeholder{
+	color: var(--pallete-1);
+
+}
+.input-container input:focus, .input-container textarea:focus{
+    outline: var(--pallete-1);
+}
+
+
+
+
+/* Select */
+.input-container select {
+	transition: all 0.4s ease;
+
+    background-color: transparent;
+
+	border: none;
+	border-bottom: 3px solid;
+    border-image: linear-gradient(90deg, var(--pallete-1) 0%, rgba(0,212,255,0) 100%);
+    border-image-slice: 1;
+
+	color: var(--text-color);
+    cursor: pointer;
+}
+.input-container select:focus {
+    outline: none;
+}
+
+
+/* Hover input and select */
+.input-container:hover label, 
+.input-container:hover label
+{
+	transform: translateX(5px);
+}
+
+/* Input File */
+
+.upload-file-container {
+	width: 100%;
+	padding: 20px 30px;
+	background-color: var(--lines-color);
+	border-radius: 10px;
+
+	box-sizing: border-box;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 15px;
+
+	cursor: pointer;
+}
+.upload-file-container input {
+	display: none;
+}
+
+.upload-file-container span {
+	border-radius: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	background-color: var(--white-to-black-color);
+	
+    padding: 10px;
+	box-sizing: border-box;
+
+	transition: all 0.2s ease;
+}
+.upload-file-container:hover span {
+	transform: scale(1.1);
+}
+.upload-file-container span svg {
+	width: 30px;
+	height: 30px;
+	color: var(--lines-color);
+}
+
+.upload-file-info-container {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	color: var(--white-to-black-color);
+	font-size: 12px;
+}
+.upload-file-info-container p:nth-child(1){
+	font-size: 16px;
+	font-weight: bold;
+}
+.info-text {
+	max-width: 350px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}

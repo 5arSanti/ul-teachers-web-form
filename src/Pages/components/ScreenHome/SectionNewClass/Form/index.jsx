@@ -23,10 +23,12 @@ const Form = ({ showForm }) => {
         Cedula: null,
         Nombre: null,
         Apellido: null,
+
         "1_Existe_Quorum": null,
         "3_Aprueba_Orden_Dia": null,
         "4_Aprueba_Reglamento_Interno_Asamblea": null,
-        "5_Eleccion_Presidente_Secretario": null,
+        "5_Eleccion_Presidente": null,
+        "5_Eleccion_Secretario": null,
         "6_Delegados_Comision": null,
         "8_Informe_Junta_Directiva": null,
         "9_Informe_Gerencia": null,
@@ -36,6 +38,8 @@ const Form = ({ showForm }) => {
         "13_Aprueba_Proyecto_Aplicacion_Excedentes": null,
         "15_Aprueba_Proyecto_Reforma_Estatutos": null,
         "16_Junta_Directiva": null,
+        "17_Revisor_Fiscal": null,
+        "17_Revisor_Fiscal_Suplente": null,
         "17_Revisor_Fiscal_Suplente_Honorarios": null,
         "18_Comite_Control_Social": null,
     };
@@ -79,7 +83,7 @@ const Form = ({ showForm }) => {
 
     return (
         <form className="form-container" onSubmit={handleSubmit}>
-            <WrapperContainer2 className="form-inputs-container" justifyContent="start" alignItems="center" padding={40} gap={30} flexDirection="column">
+            <WrapperContainer2 className="form-inputs-container" justifyContent="start" alignItems="center" padding={40} gap={40} flexDirection="column">
                 <FormAditionalInfo />
 
                 <InputCard
@@ -137,15 +141,28 @@ const Form = ({ showForm }) => {
                     defaultValue={values["4_Aprueba_Reglamento_Interno_Asamblea"]}
                 />
 
-                <OptionInputCard
-                    none={true}
-                    id={"5_Eleccion_Presidente_Secretario"}
-                    label={"5. Elección Presidente y Secretario"}
-                    placeholder="Seleccione su respuesta"
-                    // array={booleanValues}
-                    onChange={(event) => setValues({ ...values, "5_Eleccion_Presidente_Secretario": event })}
-                    defaultValue={values["5_Eleccion_Presidente_Secretario"]}
-                />
+
+                <GridContainer>
+                    <OptionInputCard
+                        none={true}
+                        id={"5_Eleccion_Presidente"}
+                        label={"5. Eleccion de Presidente de la Asamblea"}
+                        placeholder="Seleccione su respuesta"
+                        array={["Candidato 1", "Candidato 2", "Candidato 3", "Candidato 4", "Candidato 5", "Candidato 6", "Candidato 7", "Candidato 8", "Candidato 9", "Candidato 10"]}
+                        onChange={(event) => setValues({ ...values, "5_Eleccion_Presidente": event })}
+                        defaultValue={values["5_Eleccion_Presidente"]}
+                    />
+                    <OptionInputCard
+                        none={true}
+                        id={"5_Eleccion_Secretario"}
+                        label={"5. Eleccion de Secretario de la Asamblea"}
+                        placeholder="Seleccione su respuesta"
+                        array={["Candidato 1", "Candidato 2", "Candidato 3", "Candidato 4", "Candidato 5", "Candidato 6", "Candidato 7", "Candidato 8", "Candidato 9", "Candidato 10"]}
+                        onChange={(event) => setValues({ ...values, "5_Eleccion_Secretario": event })}
+                        defaultValue={values["5_Eleccion_Secretario"]}
+                    />
+
+                </GridContainer>
 
                 <MultiSelectCard
                     id={"6_Delegados_Comision"}
@@ -159,7 +176,7 @@ const Form = ({ showForm }) => {
 
                 <MultiSelectCard
                     id={"8_Informe_Junta_Directiva"}
-                    label={"8. Informe Junta Directiva"}
+                    label={"8. Presentacion del informe de la Junta Directiva del año 2025"}
                     placeholder="Seleccione su respuesta"
                     array={[]}
                     onChange={(event) => setValues({ ...values, "8_Informe_Junta_Directiva": event })}
@@ -168,7 +185,7 @@ const Form = ({ showForm }) => {
 
                 <MultiSelectCard
                     id={"9_Informe_Gerencia"}
-                    label={"9. Informe Gerencia"}
+                    label={"9. Presentacion del informe de Gerencia del año 2025"}
                     placeholder="Seleccione su respuesta"
                     array={[]}
                     onChange={(event) => setValues({ ...values, "9_Informe_Gerencia": event })}
@@ -192,6 +209,74 @@ const Form = ({ showForm }) => {
                     onChange={(event) => setValues({ ...values, "11_Dictamen_Revisor_Fiscal": event })}
                     defaultValue={values["11_Dictamen_Revisor_Fiscal"]}
                 />
+
+                <OptionInputCard
+                    none={true}
+                    id={"12_Aprueba_Estados_Financieros"}
+                    label={"12. ¿Aprueba los Estados Financieros a diciembre de 2025?"}
+                    placeholder="Seleccione su respuesta"
+                    array={booleanValues}
+                    onChange={(event) => setValues({ ...values, "12_Aprueba_Estados_Financieros": event })}
+                    defaultValue={values["12_Aprueba_Estados_Financieros"]}
+                />
+
+                <OptionInputCard
+                    none={true}
+                    id={"13_Aprueba_Proyecto_Aplicacion_Excedentes"}
+                    label={"13. ¿Aprueba el proyecto de Aplicacion de Excedentes del año 2025?"}
+                    placeholder="Seleccione su respuesta"
+                    array={booleanValues}
+                    onChange={(event) => setValues({ ...values, "13_Aprueba_Proyecto_Aplicacion_Excedentes": event })}
+                    defaultValue={values["13_Aprueba_Proyecto_Aplicacion_Excedentes"]}
+                />
+
+                <OptionInputCard
+                    none={true}
+                    id={"15_Aprueba_Proyecto_Reforma_Estatutos"}
+                    label={"15. ¿Aprueba el Proyecto de Reforma de Estatutos Art. 12?"}
+                    placeholder="Seleccione su respuesta"
+                    array={booleanValues}
+                    onChange={(event) => setValues({ ...values, "15_Aprueba_Proyecto_Reforma_Estatutos": event })}
+                    defaultValue={values["15_Aprueba_Proyecto_Reforma_Estatutos"]}
+                />
+
+                <MultiSelectCard
+                    id={"16_Junta_Directiva"}
+                    label={"16. Eleccion de Junta Directiva"}
+                    placeholder="Seleccione su respuesta"
+                    array={[]}
+                    onChange={(event) => setValues({ ...values, "16_Junta_Directiva": event })}
+                    defaultValue={values["16_Junta_Directiva"]}
+                />
+
+                <GridContainer>
+                    <OptionInputCard
+                        none={true}
+                        id={"17_Revisor_Fiscal"}
+                        label={"17. Eleccion de Revisor Fiscal"}
+                        placeholder="Seleccione su respuesta"
+                        array={["Candidato 1", "Candidato 2", "Candidato 3", "Candidato 4", "Candidato 5", "Candidato 6", "Candidato 7", "Candidato 8", "Candidato 9", "Candidato 10"]}
+                        onChange={(event) => setValues({ ...values, "17_Revisor_Fiscal": event })}
+                        defaultValue={values["17_Revisor_Fiscal"]}
+                    />
+                    <OptionInputCard
+                        none={true}
+                        id={"17_Revisor_Fiscal_Suplente"}
+                        label={"17. Eleccion de Revisor Fiscal Suplente"}
+                        placeholder="Seleccione su respuesta"
+                        array={["Candidato 1", "Candidato 2", "Candidato 3", "Candidato 4", "Candidato 5", "Candidato 6", "Candidato 7", "Candidato 8", "Candidato 9", "Candidato 10"]}
+                        onChange={(event) => setValues({ ...values, "17_Revisor_Fiscal_Suplente": event })}
+                        defaultValue={values["17_Revisor_Fiscal_Suplente"]}
+                    />
+                    <InputCard
+                        id={"17_Revisor_Fiscal_Suplente_Honorarios"}
+                        label={"17. Honorarios del Revisor Fiscal"}
+                        type="number"
+                        placeholder="Ingrese el valor de los honorarios"
+                        onChange={(event) => setValues({ ...values, "17_Revisor_Fiscal_Suplente_Honorarios": event })}
+                        defaultValue={values["17_Revisor_Fiscal_Suplente_Honorarios"] || ""}
+                    />
+                </GridContainer>
 
 
 

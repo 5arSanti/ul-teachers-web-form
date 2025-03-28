@@ -1,31 +1,34 @@
 /* eslint-disable react/prop-types */
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import "./styles.css";
+import React from "react";
+import { GridContainer } from "../GridContainer";
+import { WrapperContainer2 } from "../WrapperContainers";
 
 // eslint-disable-next-line react/prop-types
 const InputCard = ({
-    type="text", 
-    id, 
-    label, 
-    placeholder, 
-    onChange, 
-    required=true, 
-    defaultValue="", 
-    className="input-container", 
-    haveLabel=true,
-    pattern=".*",
+    type = "text",
+    id,
+    label,
+    placeholder,
+    onChange,
+    required = true,
+    defaultValue = "",
+    className = "input-container",
+    haveLabel = true,
+    pattern = ".*",
 }) => {
 
-    return(
+    return (
         <div className={`${className}`}>
             {haveLabel && <label htmlFor={id}>{label} {required && "*"}</label>}
-            
+
             <input
                 type={type}
                 placeholder={placeholder ? placeholder : label}
                 name={id}
                 id={id}
-                onChange={(event) => {onChange(event.target.value)}}
+                onChange={(event) => { onChange(event.target.value) }}
                 required={required}
                 defaultValue={defaultValue}
                 pattern={pattern}
@@ -34,23 +37,23 @@ const InputCard = ({
     );
 }
 
-const OptionInputCard = ({id, label, array=[], onChange, defaultValue=0, none=false, padding=15, required=true}) => {
-    return(
+const OptionInputCard = ({ id, label, array = [], onChange, defaultValue = 0, none = false, padding = 15, required = true }) => {
+    return (
         <div className="input-container">
             <label htmlFor={id}>{label} {required && "*"}</label>
-            <select 
-                name={id} 
+            <select
+                name={id}
                 id={id}
-                onChange={(event) => {onChange(event.target.value)}}
+                onChange={(event) => { onChange(event.target.value) }}
                 value={defaultValue}
-                style={{padding: padding}}
+                style={{ padding: padding }}
                 required={required}
             >
-                {none && 
+                {none &&
                     <option value="">Seleccionar</option>
                 }
                 {array?.map((item, index) => (
-                    <option 
+                    <option
                         key={index}
                         value={item}
                     >
@@ -58,19 +61,19 @@ const OptionInputCard = ({id, label, array=[], onChange, defaultValue=0, none=fa
                     </option>
                 ))}
             </select>
-        </div> 
+        </div>
     );
 }
 
-const TextAreaCard = ({id, label, placeholder="placeholder", onChange, required=true, stateKey, defaultValue=""}) => {
-    return(
+const TextAreaCard = ({ id, label, placeholder = "placeholder", onChange, required = true, defaultValue = "" }) => {
+    return (
         <div className="input-container">
             <label htmlFor={id}>{label} {required && "*"}</label>
             <textarea
                 placeholder={placeholder}
                 name={id}
                 id={id}
-                onChange={(event) => {onChange(event.target.value)}}
+                onChange={(event) => { onChange(event.target.value) }}
                 required
                 defaultValue={defaultValue}
             />
@@ -78,36 +81,85 @@ const TextAreaCard = ({id, label, placeholder="placeholder", onChange, required=
     );
 }
 
-const UploadFileCard = ({id, label="Cargar Archivo", onChange, filesArray, multiple=true, info="Archivos PDF (.pdf) o Excel (.xlsx)", accept=".pdf, .xlsx"}) => {
+const UploadFileCard = ({ id, label = "Cargar Archivo", onChange, filesArray, multiple = true, info = "Archivos PDF (.pdf) o Excel (.xlsx)", accept = ".pdf, .xlsx" }) => {
     const array = filesArray ? [...filesArray] : null;
 
-    return(
+    return (
         <label htmlFor={id} className="upload-file-container">
             <input
                 id={id}
                 name={id}
                 type="file"
                 accept={accept}
-                onChange={(event) => {onChange(event)}}
+                onChange={(event) => { onChange(event) }}
                 onClick={(event) => event.target.value = null}
                 multiple={multiple}
             />
             <span>
-                <AiOutlineCloudUpload/>
+                <AiOutlineCloudUpload />
             </span>
             <div className="upload-file-info-container">
                 <p>{label}</p>
                 {array && array?.length !== 0 ? [...filesArray]?.map((item, index) => (
                     <p className="info-text" key={index}>{`(${index + 1})`} {item.name}</p>
                 ))
-                :
-                <p>{info}</p>
-            }
+                    :
+                    <p>{info}</p>
+                }
             </div>
 
         </label>
     );
 }
 
+const MultiSelectCard = ({ id, label, array = [], onChange, required = true }) => {
+    const [selectedOptions, setSelectedOptions] = React.useState([]);
+    const [isOpen, setIsOpen] = React.useState(false);
 
-export { InputCard, OptionInputCard, TextAreaCard, UploadFileCard };
+    const handleChange = (event) => {
+        const { value, checked } = event.target;
+        let updatedOptions = checked
+            ? [...selectedOptions, value]
+            : selectedOptions.filter((item) => item !== value);
+
+        setSelectedOptions(updatedOptions);
+        onChange(updatedOptions.join(", "));
+    };
+
+    return (
+        <div className="input-container">
+            <label htmlFor={id}>{label} {required && "*"}</label>
+            <div className="multi-select" onClick={() => setIsOpen(!isOpen)}>
+                <input
+                    style={{ width: "100%", cursor: "pointer" }}
+                    type="text"
+                    id={id}
+                    name={id}
+                    value={selectedOptions.length > 0 ? selectedOptions.join(", ") : "Seleccione sus respuestas"}
+                    readOnly
+                    required={required}
+                />
+            </div>
+            {isOpen && (
+                <div className="multi-select-dropdown">
+                    <GridContainer className="grid-1-1" padding={0} gap={0}>
+                        {array.map((option, index) => (
+                            <WrapperContainer2 key={index} justifyContent="start" alignItems="center" padding={5} gap={10}>
+                                <input
+                                    type="checkbox"
+                                    value={option}
+                                    checked={selectedOptions.includes(option)}
+                                    onChange={handleChange}
+                                />
+                                {option}
+                            </WrapperContainer2>
+                        ))}
+                    </GridContainer>
+                </div>
+            )}
+        </div>
+    );
+};
+
+
+export { InputCard, OptionInputCard, TextAreaCard, UploadFileCard, MultiSelectCard };

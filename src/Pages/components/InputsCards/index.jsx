@@ -112,15 +112,23 @@ const UploadFileCard = ({ id, label = "Cargar Archivo", onChange, filesArray, mu
     );
 }
 
-const MultiSelectCard = ({ id, label, array = [], onChange, required = true }) => {
+const MultiSelectCard = ({ id, label, array = [], onChange, required = true, maxSelection = 10 }) => {
     const [selectedOptions, setSelectedOptions] = React.useState([]);
     const [isOpen, setIsOpen] = React.useState(false);
 
     const handleChange = (event) => {
         const { value, checked } = event.target;
-        let updatedOptions = checked
-            ? [...selectedOptions, value]
-            : selectedOptions.filter((item) => item !== value);
+        let updatedOptions;
+
+        if (checked) {
+            if (selectedOptions.length < maxSelection) {
+                updatedOptions = [...selectedOptions, value];
+            } else {
+                return;
+            }
+        } else {
+            updatedOptions = selectedOptions.filter((item) => item !== value);
+        }
 
         setSelectedOptions(updatedOptions);
         onChange(updatedOptions.join(", "));
@@ -146,10 +154,12 @@ const MultiSelectCard = ({ id, label, array = [], onChange, required = true }) =
                         {array.map((option, index) => (
                             <WrapperContainer2 key={index} justifyContent="start" alignItems="center" padding={5} gap={10}>
                                 <input
+                                    style={{ cursor: "pointer", height: "15px", width: "15px" }}
                                     type="checkbox"
                                     value={option}
                                     checked={selectedOptions.includes(option)}
                                     onChange={handleChange}
+                                    disabled={selectedOptions.length >= maxSelection && !selectedOptions.includes(option)}
                                 />
                                 {option}
                             </WrapperContainer2>

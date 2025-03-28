@@ -149,11 +149,48 @@ const Form = ({ showForm }) => {
 
                 <MultiSelectCard
                     id={"6_Delegados_Comision"}
-                    label={"6. Delegados a Comisión"}
+                    label={"6. Eleccion de dos (2) delegados para la Comisión de Revision y Aprobacion Del Acta de la Asamblea"}
                     placeholder="Seleccione su respuesta"
-                    array={[]}
+                    array={["Delegado 1", "Delegado 2", "Delegado 3", "Delegado 4", "Delegado 5", "Delegado 6", "Delegado 7", "Delegado 8", "Delegado 9", "Delegado 10"]}
                     onChange={(event) => setValues({ ...values, "6_Delegados_Comision": event })}
                     defaultValue={values["6_Delegados_Comision"]}
+                    maxSelection={2}
+                />
+
+                <MultiSelectCard
+                    id={"8_Informe_Junta_Directiva"}
+                    label={"8. Informe Junta Directiva"}
+                    placeholder="Seleccione su respuesta"
+                    array={[]}
+                    onChange={(event) => setValues({ ...values, "8_Informe_Junta_Directiva": event })}
+                    defaultValue={values["8_Informe_Junta_Directiva"]}
+                />
+
+                <MultiSelectCard
+                    id={"9_Informe_Gerencia"}
+                    label={"9. Informe Gerencia"}
+                    placeholder="Seleccione su respuesta"
+                    array={[]}
+                    onChange={(event) => setValues({ ...values, "9_Informe_Gerencia": event })}
+                    defaultValue={values["9_Informe_Gerencia"]}
+                />
+
+                <MultiSelectCard
+                    id={"10_Informe_Comite_Control"}
+                    label={"10. Informe Comité de Control"}
+                    placeholder="Seleccione su respuesta"
+                    array={[]}
+                    onChange={(event) => setValues({ ...values, "10_Informe_Comite_Control": event })}
+                    defaultValue={values["10_Informe_Comite_Control"]}
+                />
+
+                <MultiSelectCard
+                    id={"11_Dictamen_Revisor_Fiscal"}
+                    label={"11. Dictamen Revisor Fiscal"}
+                    placeholder="Seleccione su respuesta"
+                    array={[]}
+                    onChange={(event) => setValues({ ...values, "11_Dictamen_Revisor_Fiscal": event })}
+                    defaultValue={values["11_Dictamen_Revisor_Fiscal"]}
                 />
 
 

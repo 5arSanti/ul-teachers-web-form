@@ -11,10 +11,12 @@ import { AppContext } from "../../../../Context";
 
 const SectionNewClass = () => {
     const { loading } = React.useContext(AppContext);
+    
     const [showForm, setShowForm] = React.useState(true);
-
+    
     React.useEffect(() => {
-        if (localStorage.getItem("sended")) { setShowForm(false); }
+        const sended = localStorage.getItem("sended");
+        if (sended) { setShowForm(false); }
     }, []);
 
 
@@ -26,7 +28,7 @@ const SectionNewClass = () => {
                 </WrapperContainer2>
 
                 {!showForm ? <SendedCardInfo /> : <Form showForm={showForm} />}
-                {loading && <Loader message="Enviado la informacion, por favor espere un momento"/>}
+                {loading && <Loader message="Cargando, por favor espere un momento"/>}
 
             </GridContainer>
         </FadeWrapper>

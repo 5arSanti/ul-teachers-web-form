@@ -9,10 +9,10 @@ import { IoIosSend } from "react-icons/io";
 
 import "./styles.css"
 import React from "react";
-import { handleNotifications } from "../../../../../utils/handleNotifications";
 import { AppContext } from "../../../../../Context";
-import { reloadLocation } from "../../../../../utils/realoadLocation";
 import { SubTitle } from "../../../SubTitle";
+import { handleSubmit } from "../../../../../utils/Api/handleSubmit";
+import { getValues } from "../../../../../utils/Api/handleGetValues";
 
 const Form = ({ showForm }) => {
     const { setLoading, loading } = React.useContext(AppContext);
@@ -26,7 +26,6 @@ const Form = ({ showForm }) => {
         Cedula: null,
         Nombre: null,
         Apellido: null,
-
         "1_Existe_Quorum": null,
         "3_Aprueba_Orden_Dia": null,
         "4_Aprueba_Reglamento_Interno_Asamblea": null,
@@ -49,70 +48,12 @@ const Form = ({ showForm }) => {
 
     const [values, setValues] = React.useState(initialValues);
 
-    const getValues = async () => {
-        setLoading(true);
+    React.useEffect(() => { getValues(setLoading, setPostulations); }, [])
 
-        try {
-            const response = await fetch(import.meta.env.VITE_API_GOOGLE_APP_SHEET, {
-                redirect: "follow",
-                method: "GET",
-                headers: {
-                    "Content-Type": "text/plain;charset=utf-8",
-                },
-            });
 
-            const data = await response.json();
-
-            if (data.success) {
-                setPostulations(data.results);
-            }   
-
-        } catch (error) {
-            handleNotifications("error", error.message);
-        }
-
-        setLoading(false);
-    }
-
-    React.useEffect(() => {
-        getValues();
-    }, [])
-
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        setLoading(true);
-
-        localStorage.setItem("form", JSON.stringify(values));
-
-        try {
-            const response = await fetch(import.meta.env.VITE_API_GOOGLE_APP_SHEET, {
-                redirect: "follow",
-                method: "POST",
-                body: JSON.stringify(values),
-                headers: {
-                    "Content-Type": "text/plain;charset=utf-8",
-                },
-            });
-
-            const data = await response.json();
-
-            if (data.success) {
-                localStorage.setItem("sended", true);
-                handleNotifications("success", data.message);
-            }
-            reloadLocation(1000)
-
-        }
-        catch (error) {
-            handleNotifications("error", "Error al enviar la información, intentelo de nuevo");
-            reloadLocation(2000)
-        }
-
-        setLoading(false);
-    }
 
     return (
-        <form className="form-container" onSubmit={handleSubmit}>
+        <form className="form-container" onSubmit={(event) => handleSubmit(event, setLoading, values)}>
             <WrapperContainer2 className="form-inputs-container" justifyContent="start" alignItems="center" padding={40} gap={40} flexDirection="column">
                 <FormAditionalInfo />
 

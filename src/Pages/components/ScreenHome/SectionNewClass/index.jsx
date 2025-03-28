@@ -20,7 +20,7 @@ const SectionNewClass = () => {
 
     return (
         <FadeWrapper>
-            <GridContainer padding={0} className="grid-1-1 main-form-container" gap={0}>
+            <GridContainer padding={0} className="grid-1 main-form-container" gap={0}>
                 <WrapperContainer2 padding={0} justifyContent="center" alignItems="center">
                     <img src="https://www.unilibre.edu.co/bogota/images/2020/agosto/POST-INFO-formulario.jpg" alt="Banner image" />
                 </WrapperContainer2>

@@ -16,7 +16,7 @@ const WrapperContainer1 = ({children, flexDirection = "row", padding = 20, gap =
     );
 }
 
-const WrapperContainer2 = ({children, flexDirection = "row", padding = 20, paddingVertical=null, gap = 15, justifyContent="start", alignItems="center", className="", height="100%"}) => {
+const WrapperContainer2 = ({children, flexDirection = "column", padding = 20, paddingVertical=null, gap = 15, justifyContent="start", alignItems="center", className="", height="100%"}) => {
     return(
         <div className={`wrapper-container2 ${className}`} style={{
             flexDirection: flexDirection,

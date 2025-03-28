@@ -17,6 +17,8 @@ import { SubTitle } from "../../../SubTitle";
 const Form = ({ showForm }) => {
     const { setLoading, loading } = React.useContext(AppContext);
 
+    const [postulations, setPostulations] = React.useState([]);
+
     const booleanValues = ["SI", "NO"];
 
     const initialValues = JSON.parse(localStorage.getItem("form")) || {
@@ -47,7 +49,34 @@ const Form = ({ showForm }) => {
 
     const [values, setValues] = React.useState(initialValues);
 
-    console.log(values);
+    const getValues = async () => {
+        setLoading(true);
+
+        try {
+            const response = await fetch(import.meta.env.VITE_API_GOOGLE_APP_SHEET, {
+                redirect: "follow",
+                method: "GET",
+                headers: {
+                    "Content-Type": "text/plain;charset=utf-8",
+                },
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                setPostulations(data.results);
+            }   
+
+        } catch (error) {
+            handleNotifications("error", error.message);
+        }
+
+        setLoading(false);
+    }
+
+    React.useEffect(() => {
+        getValues();
+    }, [])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -157,7 +186,7 @@ const Form = ({ showForm }) => {
                             id={"5_Eleccion_Presidente"}
                             label={"5. Eleccion de Presidente de la Asamblea"}
                             placeholder="Seleccione su respuesta"
-                            array={["Candidato 1", "Candidato 2", "Candidato 3", "Candidato 4", "Candidato 5", "Candidato 6", "Candidato 7", "Candidato 8", "Candidato 9", "Candidato 10"]}
+                            array={postulations?.["5_Eleccion_Presidente"]}
                             onChange={(event) => setValues({ ...values, "5_Eleccion_Presidente": event })}
                             defaultValue={values["5_Eleccion_Presidente"]}
                         />
@@ -166,7 +195,7 @@ const Form = ({ showForm }) => {
                             id={"5_Eleccion_Secretario"}
                             label={"5. Eleccion de Secretario de la Asamblea"}
                             placeholder="Seleccione su respuesta"
-                            array={["Candidato 1", "Candidato 2", "Candidato 3", "Candidato 4", "Candidato 5", "Candidato 6", "Candidato 7", "Candidato 8", "Candidato 9", "Candidato 10"]}
+                            array={postulations?.["5_Eleccion_Secretario"]}
                             onChange={(event) => setValues({ ...values, "5_Eleccion_Secretario": event })}
                             defaultValue={values["5_Eleccion_Secretario"]}
                         />
@@ -177,7 +206,7 @@ const Form = ({ showForm }) => {
                         id={"6_Delegados_Comision"}
                         label={"6. Eleccion de dos (2) delegados para la Comisión de Revision y Aprobacion Del Acta de la Asamblea"}
                         placeholder="Seleccione su respuesta"
-                        array={["Delegado 1", "Delegado 2", "Delegado 3", "Delegado 4", "Delegado 5", "Delegado 6", "Delegado 7", "Delegado 8", "Delegado 9", "Delegado 10"]}
+                        array={postulations?.["6_Delegados_Comision"]}
                         onChange={(event) => setValues({ ...values, "6_Delegados_Comision": event })}
                         defaultValue={values["6_Delegados_Comision"]}
                         maxSelection={2}
@@ -187,7 +216,7 @@ const Form = ({ showForm }) => {
                         id={"8_Informe_Junta_Directiva"}
                         label={"8. Presentacion del informe de la Junta Directiva del año 2025"}
                         placeholder="Seleccione su respuesta"
-                        array={[]}
+                        array={postulations?.["8_Informe_Junta_Directiva"]}
                         onChange={(event) => setValues({ ...values, "8_Informe_Junta_Directiva": event })}
                         defaultValue={values["8_Informe_Junta_Directiva"]}
                     />
@@ -196,7 +225,7 @@ const Form = ({ showForm }) => {
                         id={"9_Informe_Gerencia"}
                         label={"9. Presentacion del informe de Gerencia del año 2025"}
                         placeholder="Seleccione su respuesta"
-                        array={[]}
+                        array={postulations?.["9_Informe_Gerencia"]}
                         onChange={(event) => setValues({ ...values, "9_Informe_Gerencia": event })}
                         defaultValue={values["9_Informe_Gerencia"]}
                     />
@@ -205,7 +234,7 @@ const Form = ({ showForm }) => {
                         id={"10_Informe_Comite_Control"}
                         label={"10. Informe Comité de Control"}
                         placeholder="Seleccione su respuesta"
-                        array={[]}
+                        array={postulations?.["10_Informe_Comite_Control"]}
                         onChange={(event) => setValues({ ...values, "10_Informe_Comite_Control": event })}
                         defaultValue={values["10_Informe_Comite_Control"]}
                     />
@@ -214,7 +243,7 @@ const Form = ({ showForm }) => {
                         id={"11_Dictamen_Revisor_Fiscal"}
                         label={"11. Dictamen Revisor Fiscal"}
                         placeholder="Seleccione su respuesta"
-                        array={[]}
+                        array={postulations?.["11_Dictamen_Revisor_Fiscal"]}
                         onChange={(event) => setValues({ ...values, "11_Dictamen_Revisor_Fiscal": event })}
                         defaultValue={values["11_Dictamen_Revisor_Fiscal"]}
                     />
@@ -253,7 +282,7 @@ const Form = ({ showForm }) => {
                         id={"16_Junta_Directiva"}
                         label={"16. Eleccion de Junta Directiva"}
                         placeholder="Seleccione su respuesta"
-                        array={[]}
+                        array={postulations?.["16_Junta_Directiva"]}
                         onChange={(event) => setValues({ ...values, "16_Junta_Directiva": event })}
                         defaultValue={values["16_Junta_Directiva"]}
                     />
@@ -264,7 +293,7 @@ const Form = ({ showForm }) => {
                             id={"17_Revisor_Fiscal"}
                             label={"17. Eleccion de Revisor Fiscal"}
                             placeholder="Seleccione su respuesta"
-                            array={["Candidato 1", "Candidato 2", "Candidato 3", "Candidato 4", "Candidato 5", "Candidato 6", "Candidato 7", "Candidato 8", "Candidato 9", "Candidato 10"]}
+                            array={postulations?.["17_Revisor_Fiscal"]}
                             onChange={(event) => setValues({ ...values, "17_Revisor_Fiscal": event })}
                             defaultValue={values["17_Revisor_Fiscal"]}
                         />
@@ -273,7 +302,7 @@ const Form = ({ showForm }) => {
                             id={"17_Revisor_Fiscal_Suplente"}
                             label={"17. Eleccion de Revisor Fiscal Suplente"}
                             placeholder="Seleccione su respuesta"
-                            array={["Candidato 1", "Candidato 2", "Candidato 3", "Candidato 4", "Candidato 5", "Candidato 6", "Candidato 7", "Candidato 8", "Candidato 9", "Candidato 10"]}
+                            array={postulations?.["17_Revisor_Fiscal_Suplente"]}
                             onChange={(event) => setValues({ ...values, "17_Revisor_Fiscal_Suplente": event })}
                             defaultValue={values["17_Revisor_Fiscal_Suplente"]}
                         />
@@ -287,7 +316,6 @@ const Form = ({ showForm }) => {
                         defaultValue={values["17_Revisor_Fiscal_Suplente_Honorarios"] || ""}
                     />
                 </WrapperContainer2>
-
 
 
                 <ButtonCard

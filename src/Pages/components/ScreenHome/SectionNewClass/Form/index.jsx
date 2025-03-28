@@ -14,6 +14,9 @@ import { SubTitle } from "../../../SubTitle";
 import { handleSubmit } from "../../../../../utils/Api/handleSubmit";
 import { getValues } from "../../../../../utils/Api/handleGetValues";
 
+import { IoReloadOutline } from "react-icons/io5";
+import { TextCard } from "../../../TextComponents";
+
 const Form = ({ showForm }) => {
     const { setLoading, loading } = React.useContext(AppContext);
 
@@ -93,6 +96,15 @@ const Form = ({ showForm }) => {
 
                 <WrapperContainer2 padding={0} gap={35}>
                     <SubTitle>Preguntas de la Asamblea</SubTitle>
+
+
+                    <TextCard>Puede utilizar el boton encontrado a continuacion, para recargar el formulario, en dado caso que no le aparezca alguna opcion de seleccion</TextCard>
+                    <ButtonCard title="Recargar formulario" onClick={() => {
+                        localStorage.setItem("form", JSON.stringify(values));
+                        getValues(setLoading, setPostulations);
+                    }}>
+                        Recargar formulario <IoReloadOutline />
+                    </ButtonCard>
 
                     <OptionInputCard
                         none={true}

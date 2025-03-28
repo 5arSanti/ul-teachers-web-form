@@ -4,6 +4,7 @@ import "./styles.css";
 import React from "react";
 import { GridContainer } from "../GridContainer";
 import { WrapperContainer2 } from "../WrapperContainers";
+import { SpanCard, TextCard } from "../TextComponents";
 
 // eslint-disable-next-line react/prop-types
 const InputCard = ({
@@ -151,7 +152,7 @@ const MultiSelectCard = ({ id, label, array = [], onChange, required = true, max
             {isOpen && (
                 <div className="multi-select-dropdown">
                     <GridContainer className="grid-1-1" padding={0} gap={0}>
-                        {array.map((option, index) => (
+                        {array && array.length > 0 ? array.map((option, index) => (
                             <WrapperContainer2 key={index} justifyContent="start" alignItems="center" padding={5} gap={10}>
                                 <input
                                     style={{ cursor: "pointer", height: "15px", width: "15px" }}
@@ -163,7 +164,11 @@ const MultiSelectCard = ({ id, label, array = [], onChange, required = true, max
                                 />
                                 {option}
                             </WrapperContainer2>
-                        ))}
+                        )) :
+                            <TextCard className="bold italic" fontSize={16}>
+                                <SpanCard>No hay opciones disponibles</SpanCard>
+                            </TextCard>
+                        }
                     </GridContainer>
                 </div>
             )}

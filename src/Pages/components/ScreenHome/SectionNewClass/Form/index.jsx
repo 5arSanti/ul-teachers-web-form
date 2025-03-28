@@ -17,6 +17,8 @@ import { getValues } from "../../../../../utils/Api/handleGetValues";
 const Form = ({ showForm }) => {
     const { setLoading, loading } = React.useContext(AppContext);
 
+    const [reload, setReload] = React.useState(false);
+
     const [postulations, setPostulations] = React.useState([]);
 
     const booleanValues = ["SI", "NO"];
@@ -48,7 +50,9 @@ const Form = ({ showForm }) => {
 
     const [values, setValues] = React.useState(initialValues);
 
-    React.useEffect(() => { getValues(setLoading, setPostulations); }, [])
+    React.useEffect(() => {
+        getValues(setLoading, setPostulations);
+    }, [reload])
 
 
 

@@ -136,7 +136,11 @@ const MultiSelectCard = ({ id, label, array = [], onChange, required = true, max
     };
 
     return (
-        <div className="input-container">
+        <div className="input-container" style={{
+            backgroundColor: isOpen ? "#f0f0f0" : "white",
+            borderRadius: 10,
+            padding: 10,
+        }}>
             <label htmlFor={id}>{label} {required && "*"}</label>
             <div className="multi-select" onClick={() => setIsOpen(!isOpen)}>
                 <input
@@ -151,9 +155,9 @@ const MultiSelectCard = ({ id, label, array = [], onChange, required = true, max
             </div>
             {isOpen && (
                 <div className="multi-select-dropdown">
-                    <GridContainer className="grid-1-1" padding={0} gap={0}>
+                    <GridContainer className="grid-1-1" padding={10} gap={0}>
                         {array && array.length > 0 ? array.map((option, index) => (
-                            <WrapperContainer2 key={index} justifyContent="start" alignItems="center" padding={5} gap={10}>
+                            <WrapperContainer2 key={index} flexDirection="row" justifyContent="start" alignItems="center" padding={5} gap={10}>
                                 <input
                                     style={{ cursor: "pointer", height: "15px", width: "15px" }}
                                     type="checkbox"

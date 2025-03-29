@@ -15,7 +15,7 @@ import { handleSubmit } from "../../../../../utils/Api/handleSubmit";
 import { getValues } from "../../../../../utils/Api/handleGetValues";
 
 import { IoReloadOutline } from "react-icons/io5";
-import { TextCard } from "../../../TextComponents";
+import { SpanCard, TextCard } from "../../../TextComponents";
 
 const Form = ({ showForm }) => {
     const { setLoading, loading } = React.useContext(AppContext);
@@ -47,6 +47,7 @@ const Form = ({ showForm }) => {
         "16_Junta_Directiva": null,
         "17_Revisor_Fiscal": null,
         "17_Revisor_Fiscal_Suplente": null,
+        "17_Revisor_Fiscal_Honorarios": null,
         "17_Revisor_Fiscal_Suplente_Honorarios": null,
         "18_Comite_Control_Social": null,
     };
@@ -137,7 +138,7 @@ const Form = ({ showForm }) => {
                     />
 
 
-                    <GridContainer>
+                    <GridContainer background={true} padding={20}>
                         <OptionInputCard
                             none={true}
                             id={"5_Eleccion_Presidente"}
@@ -244,34 +245,46 @@ const Form = ({ showForm }) => {
                         defaultValue={values["16_Junta_Directiva"]}
                     />
 
-                    <GridContainer>
-                        <OptionInputCard
-                            none={true}
-                            id={"17_Revisor_Fiscal"}
-                            label={"17. Eleccion de Revisor Fiscal"}
-                            placeholder="Seleccione su respuesta"
-                            array={postulations?.["17_Revisor_Fiscal"]}
-                            onChange={(event) => setValues({ ...values, "17_Revisor_Fiscal": event })}
-                            defaultValue={values["17_Revisor_Fiscal"]}
-                        />
-                        <OptionInputCard
-                            none={true}
-                            id={"17_Revisor_Fiscal_Suplente"}
-                            label={"17. Eleccion de Revisor Fiscal Suplente"}
-                            placeholder="Seleccione su respuesta"
-                            array={postulations?.["17_Revisor_Fiscal_Suplente"]}
-                            onChange={(event) => setValues({ ...values, "17_Revisor_Fiscal_Suplente": event })}
-                            defaultValue={values["17_Revisor_Fiscal_Suplente"]}
-                        />
-                        <OptionInputCard
-                            none={true}
-                            id={"17_Revisor_Fiscal_Suplente_Honorarios"}
-                            label={"17. Honorarios Revisor Fiscal Suplente"}
-                            placeholder="Seleccione su respuesta"
-                            array={booleanValues}
-                            onChange={(event) => setValues({ ...values, "17_Revisor_Fiscal_Suplente_Honorarios": event })}
-                            defaultValue={values["17_Revisor_Fiscal_Suplente_Honorarios"]}
-                        />
+                    <GridContainer className="grid-1" background={true} padding={20}>
+                        <SpanCard className="bold">17. Eleccion del revisor fiscal, su suplente y fijacion de honorarios</SpanCard>
+                        <GridContainer className="grid-1-1" padding={0}>
+                            <OptionInputCard
+                                none={true}
+                                id={"17_Revisor_Fiscal"}
+                                label={"17. Eleccion de Revisor Fiscal"}
+                                placeholder="Seleccione su respuesta"
+                                array={postulations?.["17_Revisor_Fiscal"]}
+                                onChange={(event) => setValues({ ...values, "17_Revisor_Fiscal": event })}
+                                defaultValue={values["17_Revisor_Fiscal"]}
+                            />
+                            <OptionInputCard
+                                none={true}
+                                id={"17_Revisor_Fiscal_Suplente"}
+                                label={"17. Eleccion de Revisor Fiscal Suplente"}
+                                placeholder="Seleccione su respuesta"
+                                array={postulations?.["17_Revisor_Fiscal_Suplente"]}
+                                onChange={(event) => setValues({ ...values, "17_Revisor_Fiscal_Suplente": event })}
+                                defaultValue={values["17_Revisor_Fiscal_Suplente"]}
+                            />
+                            <OptionInputCard
+                                none={true}
+                                id={"17_Revisor_Fiscal_Honorarios"}
+                                label={"17. Honorarios Revisor Fiscal"}
+                                placeholder="Seleccione su respuesta"
+                                array={postulations?.["17_Revisor_Fiscal_Honorarios"]}
+                                onChange={(event) => setValues({ ...values, "17_Revisor_Fiscal_Honorarios": event })}
+                                defaultValue={values["17_Revisor_Fiscal_Honorarios"]}
+                            />
+                            <OptionInputCard
+                                none={true}
+                                id={"17_Revisor_Fiscal_Suplente_Honorarios"}
+                                label={"17. Honorarios Revisor Fiscal Suplente"}
+                                placeholder="Seleccione su respuesta"
+                                array={postulations?.["17_Revisor_Fiscal_Suplente_Honorarios"]}
+                                onChange={(event) => setValues({ ...values, "17_Revisor_Fiscal_Suplente_Honorarios": event })}
+                                defaultValue={values["17_Revisor_Fiscal_Suplente_Honorarios"]}
+                            />
+                        </GridContainer>
                     </GridContainer>
 
                     <MultiSelectCard

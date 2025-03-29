@@ -77,20 +77,20 @@ const Form = ({ showForm }) => {
                         onChange={(event) => setValues({ ...values, Cedula: event })}
                         defaultValue={values.Cedula || ""}
                     />
-                    <GridContainer className="grid-1-1" padding={0}>
+                    <GridContainer className="grid-1-1" background={true} padding={10}>
                         <InputCard
                             id={"name"}
                             label={"Nombres"}
                             placeholder="Ingrese sus nombres"
-                            onChange={(event) => setValues({ ...values, Nombres: event.toUpperCase().trim() })}
-                            defaultValue={values.Nombres || ""}
+                            onChange={(event) => setValues({ ...values, Nombre: event.toUpperCase().trim() })}
+                            defaultValue={values.Nombre}
                         />
                         <InputCard
                             id={"lastname"}
                             label={"Apellidos"}
                             placeholder="Ingrese sus apellidos"
-                            onChange={(event) => setValues({ ...values, Apellidos: event.toUpperCase().trim() })}
-                            defaultValue={values.Apellidos || ""}
+                            onChange={(event) => setValues({ ...values, Apellido: event.toUpperCase().trim() })}
+                            defaultValue={values.Apellido}
                         />
                     </GridContainer>
                 </WrapperContainer2>
@@ -138,26 +138,29 @@ const Form = ({ showForm }) => {
                     />
 
 
-                    <GridContainer background={true} padding={20}>
-                        <OptionInputCard
-                            none={true}
-                            id={"5_Eleccion_Presidente"}
-                            label={"5. Eleccion de Presidente de la Asamblea"}
-                            placeholder="Seleccione su respuesta"
-                            array={postulations?.["5_Eleccion_Presidente"]}
-                            onChange={(event) => setValues({ ...values, "5_Eleccion_Presidente": event })}
-                            defaultValue={values["5_Eleccion_Presidente"]}
-                        />
-                        <OptionInputCard
-                            none={true}
-                            id={"5_Eleccion_Secretario"}
-                            label={"5. Eleccion de Secretario de la Asamblea"}
-                            placeholder="Seleccione su respuesta"
-                            array={postulations?.["5_Eleccion_Secretario"]}
-                            onChange={(event) => setValues({ ...values, "5_Eleccion_Secretario": event })}
-                            defaultValue={values["5_Eleccion_Secretario"]}
-                        />
+                    <GridContainer className="grid-1" background={true} padding={20}>
+                        <SpanCard className="bold">5. Eleccion de Presidente y Secretario de la Asamblea</SpanCard>
 
+                        <GridContainer className="grid-1-1" padding={0}>
+                            <OptionInputCard
+                                none={true}
+                                id={"5_Eleccion_Presidente"}
+                                label={"5. Eleccion de Presidente de la Asamblea"}
+                                placeholder="Seleccione su respuesta"
+                                array={postulations?.["5_Eleccion_Presidente"]}
+                                onChange={(event) => setValues({ ...values, "5_Eleccion_Presidente": event })}
+                                defaultValue={values["5_Eleccion_Presidente"]}
+                            />
+                            <OptionInputCard
+                                none={true}
+                                id={"5_Eleccion_Secretario"}
+                                label={"5. Eleccion de Secretario de la Asamblea"}
+                                placeholder="Seleccione su respuesta"
+                                array={postulations?.["5_Eleccion_Secretario"]}
+                                onChange={(event) => setValues({ ...values, "5_Eleccion_Secretario": event })}
+                                defaultValue={values["5_Eleccion_Secretario"]}
+                            />
+                        </GridContainer>
                     </GridContainer>
 
                     <MultiSelectCard

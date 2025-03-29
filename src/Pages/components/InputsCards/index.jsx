@@ -113,7 +113,7 @@ const UploadFileCard = ({ id, label = "Cargar Archivo", onChange, filesArray, mu
     );
 }
 
-const MultiSelectCard = ({ id, label, array = [], onChange, required = true, maxSelection = 10 }) => {
+const MultiSelectCard = ({ id, label, array = [], onChange, required = true, maxSelection = 12 }) => {
     const [selectedOptions, setSelectedOptions] = React.useState([]);
     const [isOpen, setIsOpen] = React.useState(false);
 

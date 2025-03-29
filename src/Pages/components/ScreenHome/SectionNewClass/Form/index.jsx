@@ -263,18 +263,25 @@ const Form = ({ showForm }) => {
                             onChange={(event) => setValues({ ...values, "17_Revisor_Fiscal_Suplente": event })}
                             defaultValue={values["17_Revisor_Fiscal_Suplente"]}
                         />
-
-                        <MultiSelectCard
-                            id={"18_Comite_Control_Social"}
-                            label={"18. Eleccion del Comite de Control Social"}
+                        <OptionInputCard
+                            none={true}
+                            id={"17_Revisor_Fiscal_Suplente_Honorarios"}
+                            label={"17. Honorarios Revisor Fiscal Suplente"}
                             placeholder="Seleccione su respuesta"
-                            array={postulations?.["18_Comite_Control_Social"]}
-                            onChange={(event) => setValues({ ...values, "18_Comite_Control_Social": event })}
-                            defaultValue={values["18_Comite_Control_Social"]}
+                            array={booleanValues}
+                            onChange={(event) => setValues({ ...values, "17_Revisor_Fiscal_Suplente_Honorarios": event })}
+                            defaultValue={values["17_Revisor_Fiscal_Suplente_Honorarios"]}
                         />
-
                     </GridContainer>
 
+                    <MultiSelectCard
+                        id={"18_Comite_Control_Social"}
+                        label={"18. Eleccion del Comite de Control Social"}
+                        placeholder="Seleccione su respuesta"
+                        array={postulations?.["18_Comite_Control_Social"]}
+                        onChange={(event) => setValues({ ...values, "18_Comite_Control_Social": event })}
+                        defaultValue={values["18_Comite_Control_Social"]}
+                    />
                 </WrapperContainer2>
 
 
